@@ -1,6 +1,7 @@
  const fs = require('fs');
  const path = require('path');
 
+ let ejs = require('ejs');
  let babylon = require("babylon");
  let traverse = require('@babel/traverse').default;
  let t = require('@babel/types');
@@ -74,18 +75,27 @@
        this.buildModule(path.join(this.root, dep), false);
      });
    }
-   emitFile() {
-     // 用数据 渲染我们的
-
-   }
+   emitFile() { // 发射文件
+     // 用数据 渲染我们的ejs模板
+     // 拿到输出到那个目录下 输出路径
+     let main = path.join(this.config.output.path, this.config.output.filename);
+     // 读取的模板路径
+     let templateStr = this.getSource(path.join(__dirname, 'main.ejs'));
+     let code = ejs.render(templateStr, {entryId: this.entryId, modules: this.modules});
+     this.assets = {};
+     console.log('main.................', main);
+     // 资源中路径对应的代码
+     this.assets[main] = code;
+     fs.writeFileSync(main, this.assets[main]);
+    }
    run() {
      //执行，并且创建模块的依赖关系
      this.buildModule(path.resolve(this.root, this.entry), true);
-     console.log('this.modules................', this.modules);
-     console.log('this.entryid................', this.entryId);
+    //  console.log('this.modules................', this.modules);
+    //  console.log('this.entryid................', this.entryId);
 
      //发射一个文件，打包后的文件
-     //  this.emitFile();
+      this.emitFile();
    }
  }
 
