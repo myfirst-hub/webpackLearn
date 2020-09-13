@@ -9,6 +9,7 @@
   "author": "sun",
   "license": "license",
   "dependencies": {
+    "less": "^3.12.2",
     "webpack": "^4.44.1"
   },
   "devDependencies": {

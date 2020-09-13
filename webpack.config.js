@@ -6,5 +6,14 @@ module.exports = {
   output: {
     filename: 'bundle.js', // 打包后的文件名
     path: path.resolve(__dirname, 'dist'), // 路径必须是一个绝对路径
+  },
+  module: {
+    rules: [{
+      test: /\.less$/,
+      use: [
+        path.resolve(__dirname, 'loader', 'style-loader'),
+        path.resolve(__dirname, 'loader', 'less-loader')
+      ]
+    }]
   }
 }

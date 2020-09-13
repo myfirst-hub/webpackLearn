@@ -21,6 +21,8 @@ return __webpack_require__(__webpack_require__.s = "./src\index.js");
 (function (module, exports, __webpack_require__) {
 eval(`let str = __webpack_require__("./src\\a.js");
 
+__webpack_require__("./src\\index.less");
+
 console.log(str);`);
 }),
 
@@ -28,12 +30,19 @@ console.log(str);`);
 (function (module, exports, __webpack_require__) {
 eval(`let b = __webpack_require__("./src\\base\\b.js");
 
-module.exports = "a" + b;`);
+module.exports = "a1" + b;`);
 }),
 
 "./src\base\b.js":
 (function (module, exports, __webpack_require__) {
 eval(`module.exports = 'b';`);
+}),
+
+"./src\index.less":
+(function (module, exports, __webpack_require__) {
+eval(`let style = document.createElement('style');
+style.innerHTML = "body{background-color: red}";
+document.head.appendChild(style);`);
 }),
 
 });
