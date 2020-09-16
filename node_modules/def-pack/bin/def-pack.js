@@ -13,6 +13,7 @@ let Compiler = require('../lib/Compiler.js');
 let congif = require(path.resolve("webpack.config.js"));
 // console.log("start11，，，，，，，", congif);
 let compiler = new Compiler(congif);
+compiler.hooks.entryOption.call();
 
 // //标识运行编译
 compiler.run();

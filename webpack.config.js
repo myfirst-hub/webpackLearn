@@ -1,5 +1,14 @@
 let path = require('path');
 
+class P{
+  apply(compiler){
+    console.log('compiler.hooks................', compiler.hooks);
+    compiler.hooks.run.tab('emit', function(){
+      console.log('emit');
+    });
+  }
+}
+
 module.exports = {
   mode: 'development', //模式  默认两种 production  development
   entry: './src/index.js', //入口
@@ -15,5 +24,8 @@ module.exports = {
         path.resolve(__dirname, 'loader', 'less-loader')
       ]
     }]
-  }
+  },
+  plugins: [
+    new P(),
+  ]
 }
