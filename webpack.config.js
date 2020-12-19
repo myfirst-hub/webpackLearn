@@ -26,6 +26,6 @@ module.exports = {
     }]
   },
   plugins: [
-    new P(),
+    // new P(),
   ]
 }
